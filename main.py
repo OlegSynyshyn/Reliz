@@ -14,7 +14,13 @@ pause = False
 
 clock = time.Clock()
 
-btn1 = Button(window, screen_width,screen_height)
+
+
+def stop_game():
+    global game
+    game = False
+
+btn1 = Button(window, screen_width,screen_height, stop_game)
 
 treasure1 = Sprite(img_name="treasures.png", x = 250, y = 250)
 rover = Sprite()
@@ -24,6 +30,8 @@ hero = Hero()
 while game:
 
     for e in event.get():
+        if pause:
+            btn1.click(e)
         if e.type == QUIT:
             game = False
         if e.type == KEYDOWN:
@@ -33,6 +41,8 @@ while game:
             btn1.click()
 
     if pause:
+      
+            
         
         window.blit(background_pause, (0,0))
         btn1.reset()
