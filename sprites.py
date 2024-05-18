@@ -1,7 +1,7 @@
 import pygame
 
 class Sprite(pygame.sprite.Sprite):
-    def __init__ (self, img_name="rover.png", x=200, y=200, width=100, height=100, speed=0):
+    def __init__ (self, img_name="allience.png", x=200, y=200, width=100, height=100, speed=0):
         super().__init__()
 
         self.image = pygame.image.load(img_name)

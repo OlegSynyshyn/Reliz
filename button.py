@@ -1,23 +1,22 @@
 from pygame import *
 
 class Button:
-    def __init__(self, window, screen_width, screen_height, onclick_function):
-        self.window = window
-        self.width = 100
-        self.height = 50
-        self.x = screen_width/2
-        self.y = screen_height/2
+    def __init__(self,x,y, onclick_function, img_name):
+        self.width = 300
+        self.height = 150
         self.onclick_function = onclick_function
 
-        font.init()
-        self.font1 = font.Font(None, 20)
-        self.rect = rect.Rect(self.x, self.y, self.width, self.height)
+        self.image = image.load(img_name)
+        self.image = transform.scale(self.image, ( self.width, self.height))
 
-    def reset(self): 
-        draw.rect(self.window, (255,255,255), rect.Rect( self.x,  self.y,  self.width,  self.height))
-        self.window.blit(self.font1.render('Exit', True, (0,0,0)),(self.x,  self.y,))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
 
-    def click(self, vent):
+    def reset(self, window): 
+        window.blit(self.image, (self.rect.x, self.rect.y))
+   
+    def click(self, event):
         if event.type == MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 self.onclick_function()
